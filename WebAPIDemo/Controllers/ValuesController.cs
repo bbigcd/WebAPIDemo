@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebAPIDemo.Models;
 
 namespace WebAPIDemo.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class ValuesController : Controller
     {
         // GET api/values
@@ -39,6 +40,20 @@ namespace WebAPIDemo.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+        }
+
+        [HttpGet]
+        public string Login(string userName, string password)
+        {
+            var user = new UserModel();
+            if (userName.Equals(user.userName) && password.Equals(user.password))
+            {
+                return user.userName;
+            }
+            else
+            {
+                return "error";
+            }
         }
     }
 }
